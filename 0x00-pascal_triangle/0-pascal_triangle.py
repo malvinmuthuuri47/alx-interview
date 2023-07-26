@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+""" A Python script that implements the Pascal's Trinagle """
+
 def pascal_triangle(num_rows):
     """
     Pascal's triangle function implementation
