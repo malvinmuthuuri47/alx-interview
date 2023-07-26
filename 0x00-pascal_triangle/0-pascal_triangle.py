@@ -1,4 +1,10 @@
 def pascal_triangle(num_rows):
+    """
+    Pascal's triangle function implementation
+
+    Args:
+        @num_rows: Tells size of the triangle
+    """
     if num_rows < 1:
         return []
     if num_rows == 1:
