@@ -29,4 +29,4 @@ def pascal_triangle(num_rows):
 
         triangle.append(cur_row)
 
-        return triangle
+    return triangle
