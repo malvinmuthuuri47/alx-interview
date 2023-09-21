@@ -2,7 +2,7 @@
 """Change comes from within"""
 
 
-def makeChange(coins, total):
+def makeChange(coins, amount):
     """This function determines the fewest number of coins needed
     to meet a given amount
 
@@ -13,25 +13,18 @@ def makeChange(coins, total):
     Returns:
         - The fewest number of coins that add up to the total
     """
-
-    if total <= 0:
+    if amount == 0 or coins is None or len(coins) == 0:
         return 0
 
-    # Sort the array of coins in decresing order
-    coins.sort(reverse=True)
+    dp = [0] * (amount + 1)
 
-    # Initialize variables
-    num_coins = 0
-    remaining_total = total
-
-    # Iterate through each denomination of coin
     for coin in coins:
-        while remaining_total >= coin:
-            remaining_total -= coin
-            num_coins += 1
+        for i in range(coin, amount + 1):
+            if i == coin:
+                dp[i] = 1
+            elif dp[i] == 0 and dp[i - coin] != 0:
+                dp[i] = dp[i - coin] + 1
+            elif dp[i - coin] != 0:
+                dp[i] = min(dp[i], dp[i - coin] + 1)
 
-    # If remaining_total becomes 0, return the no. of coins used
-    if remaining_total == 0:
-        return num_coins
-    else:
-        return -1  # Cannot make the total with the given coins
+    return -1 if dp[amount] == 0 else dp[amount]
