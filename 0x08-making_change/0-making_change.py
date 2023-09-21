@@ -1,25 +1,37 @@
 #!/usr/bin/python3
-"""Making Change"""
+"""Change comes from within"""
 
 
 def makeChange(coins, total):
-    """A function that determines the fewest number of coins needed to
-    meet a given amount"""
-    if total < 0:
-        return -1
+    """This function determines the fewest number of coins needed
+    to meet a given amount
 
-    # Initialize a list to store the minimum number of
-    # coins needed for each amount from 0 to total.
-    # Set all values to float('inf') initially, except for s[0] which is 0.
-    s = [float('inf')] * (total + 1)
-    s[0] = 0
+    Args:
+        coins: A list of coins which are just numbers in a list
+        total: The total amount to be obtained by the coins
 
-    for coin_val in coins:
-        for i in range(coin_val, total + 1):
-            # Calculate the minimum number of coins needed
-            # for amount 'i' by considering the current coin.
-            s[i] = min(s[i], 1 + s[i - coin_val])
+    Returns:
+        - The fewest number of coins that add up to the total
+    """
 
-    # If s[total] is still float('inf'), it means the total
-    # cannot be met by any combination of coins.
-    return -1 if s[total] == float('inf') else s[total]
+    if total <= 0:
+        return 0
+
+    # Sort the array of coins in decresing order
+    coins.sort(reverse=True)
+
+    # Initialize variables
+    num_coins = 0
+    remaining_total = total
+
+    # Iterate through each denomination of coin
+    for coin in coins:
+        while remaining_total >= coin:
+            remaining_total -= coin
+            num_coins += 1
+
+    # If remaining_total becomes 0, return the no. of coins used
+    if remaining_total == 0:
+        return num_coins
+    else:
+        return -1  # Cannot make the total with the given coins
