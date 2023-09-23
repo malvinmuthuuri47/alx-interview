@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """Log parsing"""
+
 import sys
 
 possible_status_codes = [100, 301, 400, 401, 403, 404, 405, 500]
@@ -9,12 +10,11 @@ mapStatusCodes = {}
 
 
 def print_stats():
-    """A function that handles print"""
+    """This function handles printing for this module"""
     print(f"File size: {totalFileSize}")
 
     for status, count in sorted(mapStatusCodes.items()):
         print(f"{status}: {count}")
-
 
 try:
     for line in sys.stdin:
