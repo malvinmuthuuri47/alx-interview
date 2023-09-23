@@ -16,6 +16,7 @@ def print_stats():
     for status, count in sorted(mapStatusCodes.items()):
         print(f"{status}: {count}")
 
+
 try:
     for line in sys.stdin:
         try:
